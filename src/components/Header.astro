@@ -1,0 +1,20 @@
+---
+import { AvatarEl } from "./Avatar";
+import { buttonVariants } from "@/components/ui/button";
+---
+
+<div class="h-14"></div>
+<header
+    class="flex px-20 left-[50%] translate-x-[-50%] fixed top-0 bg-white container justify-between py-2 items-center"
+>
+    <div class="logo flex gap-2">
+        <a href="/" class="text-[16px] font-bold">Company Name</a>
+        <div class="divider w-[1px] h-[25px] bg-black"></div>
+        <a href="/">Contributor License Agreement</a>
+    </div>
+    <div class="info flex items-center gap-2">
+        <AvatarEl />
+        <!-- <h3 class="text-[14px] font-normal">Username</h3> -->
+        <a class={buttonVariants({ variant: "outline" })} href="/linked">Linked Repositories</a>
+    </div>
+</header>

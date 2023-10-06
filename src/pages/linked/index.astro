@@ -1,0 +1,85 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { buttonVariants } from "@/components/ui/button";
+import { EditModal } from "../../components/EditModal";
+import { ConfigureModal } from "../../components/ConfigureModal";
+import { MoreActions } from "../../components/MoreActions";
+import {
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableHeader,
+    TableRow,
+} from "@/components/ui/table";
+
+const invoices = [
+    {
+        repository: "johndoe / weather-app",
+        cla: "SAP_CLA",
+        gist: "Link",
+        shared_gist: "No",
+        contributors: 2,
+        status: true,
+    },
+    {
+        repository: "loremipsum / google-app",
+        cla: "SAP_CLA",
+        gist: "Link",
+        shared_gist: "No",
+        contributors: 26,
+        status: true,
+    },
+];
+---
+
+<Layout title="Linked Repositories">
+    <main class="container py-20 px-20">
+        <div class="flex mb-10 justify-between">
+            <ConfigureModal client:load />
+            <a class={buttonVariants({ variant: "default" })} href="/my-cla">View my signed CLAs</a>
+        </div>
+        <div class="title mb-8">
+            <h2 class="text-[24px]">Linked Repositories</h2>
+        </div>
+        <div class="p-5 markdown-body rounded-sm border">
+            <Table>
+                <TableHeader>
+                    <TableRow>
+                        <TableHead>Repository</TableHead>
+                        <TableHead>CLA</TableHead>
+                        <TableHead>Gist</TableHead>
+                        <TableHead>Shared Gist</TableHead>
+                        <TableHead>Contributors</TableHead>
+                        <TableHead>Status</TableHead>
+                        <TableHead className="text-right">Actions</TableHead>
+                    </TableRow>
+                </TableHeader>
+                <TableBody>
+                    {
+                        invoices.map((invoice, i) => (
+                            <TableRow key={i}>
+                                <TableCell>
+                                    <a class="hover:underline" href="/">
+                                        {invoice.repository}
+                                    </a>
+                                </TableCell>
+                                <TableCell>{invoice.cla}</TableCell>
+                                <TableCell>{invoice.gist}</TableCell>
+                                <TableCell>{invoice.shared_gist}</TableCell>
+                                <TableCell>{invoice.contributors}</TableCell>
+                                <TableCell className="font-medium">
+                                    <div class="w-2 h-2 bg-green-500 rounded-full" />
+                                </TableCell>
+                                <TableCell className="text-right flex gap-2 justify-end">
+                                    <EditModal name={invoice.repository} client:load />
+                                    <MoreActions client:load />
+                                </TableCell>
+                            </TableRow>
+                        ))
+                    }
+                </TableBody>
+            </Table>
+        </div>
+    </main>
+</Layout>

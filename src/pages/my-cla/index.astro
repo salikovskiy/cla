@@ -1,0 +1,86 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import {
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableHeader,
+    TableRow,
+} from "@/components/ui/table";
+
+const invoices = [
+    {
+        status: true,
+        repository: "johndoe / weather-app",
+        cla: "SAP_CLA",
+        date: "October 05, 2023",
+    },
+    {
+        status: true,
+        repository: "johndoe / lorem-ipsum",
+        cla: "SAP_CLA",
+        date: "July 21, 2023",
+    },
+    {
+        status: true,
+        repository: "johndoe / google",
+        cla: "SAP_CLA",
+        date: "December 31, 2023",
+    },
+    {
+        status: true,
+        repository: "johndoe / map-vis",
+        cla: "SAP_CLA",
+        date: "June 01, 2023",
+    },
+    {
+        status: true,
+        repository: "johndoe / ssr",
+        cla: "SAP_CLA",
+        date: "May 11, 2023",
+    },
+];
+---
+
+<Layout title="CLA list">
+    <main class="container py-20 px-20">
+        <div class="title mb-8">
+            <h2 class="text-[24px]">Signed CLA's</h2>
+        </div>
+        <div class="p-5 markdown-body rounded-sm border">
+            <Table>
+                <TableHeader>
+                    <TableRow>
+                        <TableHead className="w-[100px]">Status</TableHead>
+                        <TableHead>Repository</TableHead>
+                        <TableHead>CLA</TableHead>
+                        <TableHead className="text-right">Date of Signature</TableHead>
+                        <TableHead className="text-right">Actions</TableHead>
+                    </TableRow>
+                </TableHeader>
+                <TableBody>
+                    {
+                        invoices.map((invoice, i) => (
+                            <TableRow key={i}>
+                                <TableCell className="font-medium">
+                                    <div class="w-2 h-2 bg-green-500 rounded-full" />
+                                </TableCell>
+                                <TableCell>
+                                    <a class="hover:underline" href="/">
+                                        {invoice.repository}
+                                    </a>
+                                </TableCell>
+                                <TableCell>{invoice.cla}</TableCell>
+                                <TableCell className="text-right">{invoice.date}</TableCell>
+                                <TableCell className="text-right">
+                                    <button class="hover:underline">Revoke</button>
+                                </TableCell>
+                            </TableRow>
+                        ))
+                    }
+                </TableBody>
+            </Table>
+        </div>
+    </main>
+</Layout>

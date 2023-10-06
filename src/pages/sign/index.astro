@@ -1,0 +1,72 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { Content as Legal } from "../../lib/legal.md";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Checkbox } from "@/components/ui/checkbox";
+import { RadioGroupDemo } from "../../components/RadioGroup";
+---
+
+<Layout title="Sign the CLA">
+    <main class="container py-20 px-20">
+        <div class="title pb-2 border-b">
+            <h2 class="text-[24px]">
+                Please sign the CLA for multiple repositories or organizations
+            </h2>
+        </div>
+        <p class="py-4 text-[13px]">Version: 2023-08-02</p>
+        <div class="p-5 markdown-body rounded-sm shadow-md border">
+            <Legal />
+        </div>
+        <div class="form py-10 flex items-start flex-col gap-4">
+            <div class="grid w-full max-w-sm items-center gap-1.5">
+                <Label htmlFor="name">Full Name *</Label>
+                <Input type="text" id="name" />
+            </div>
+            <div class="grid w-full max-w-sm items-center gap-1.5">
+                <Label htmlFor="email">Email *</Label>
+                <Input type="email" id="email" />
+            </div>
+            <div class="grid w-full max-w-sm items-center gap-1.5">
+                <Label htmlFor="company">Company (optional)</Label>
+                <Input type="text" id="company" />
+            </div>
+            <div class="flex items-center space-x-2">
+                <Checkbox client:load id="terms" />
+                <label
+                    for="terms"
+                    class="text-[13px] font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                >
+                    I have read and agree to the CLA*
+                </label>
+            </div>
+            <div class="radio py-4 max-w-sm">
+                <RadioGroupDemo client:load />
+            </div>
+            <Button>I agree</Button>
+        </div>
+    </main>
+</Layout>
+
+<style is:inline>
+    .markdown-body h1,
+    h2,
+    h3 {
+        font-size: 20px;
+        font-weight: bold;
+    }
+    .markdown-body p {
+        font-size: 14px;
+    }
+    .markdown-body > * {
+        margin-bottom: 15px;
+    }
+    .markdown-body ol {
+        list-style: auto;
+    }
+    .markdown-body ol li {
+        margin-left: 30px;
+        margin-bottom: 15px;
+    }
+</style>
